@@ -198,6 +198,113 @@
     display: block;
   }
 
+  .products__modal-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .products__modal-image {
+    width: 140px;
+    height: 140px;
+    border-radius: 18px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .products__modal-info {
+    flex: 1;
+  }
+
+  .products__modal-title {
+    margin: 0 0 0.25rem;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    font-weight: 700;
+  }
+
+  .products__modal-price {
+    margin: 0 0 0.75rem;
+    color: #111111;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .products__modal-description {
+    margin: 0;
+    color: #4b5563;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .products__modal-color-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .products__modal-color-button {
+    position: relative;
+    min-width: 104px;
+    height: 56px;
+    border: 1px solid #111111;
+    border-radius: 0.75rem;
+    background: #ffffff;
+    color: #111111;
+    padding-left: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: start;
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .products__modal-color-button::before {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    width: 6px;
+    height: 24px;
+    border-radius: 9999px;
+    background: currentColor;
+  }
+
+  .products__modal-color-button--selected {
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .products__modal-select-wrapper {
+    position: relative;
+  }
+
+  .products__modal-select {
+    width: 100%;
+    height: 56px;
+    border: 1px solid #111111;
+    border-radius: 0.75rem;
+    padding: 0 3rem 0 1rem;
+    font-size: 1.125rem;
+    appearance: none;
+    background: #ffffff;
+    color: #111111;
+  }
+
+  .products__modal-select-icon {
+    pointer-events: none;
+    position: absolute;
+    inset-y: 0;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .products__add-to-cart:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
   @media screen and (min-width: 1024px) {
     .products__grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -233,6 +340,7 @@
               data-product-description="{{ block.settings.description | escape }}"
               data-product-colors="{{ block.settings.colors | escape }}"
               data-product-sizes="{{ block.settings.sizes | escape }}"
+              data-product-variant-id="{{ block.settings.variant_id | escape }}"
               data-product-image="{{ image_src }}"
             >
               <img src="{{ 'icon-plus.svg' | asset_url }}" alt="Open product details" />
@@ -346,13 +454,33 @@
       <h3 class="products__modal-title"></h3>
       <p class="products__modal-price"></p>
       <p class="products__modal-description"></p>
+      <div class="products__modal-header">
+        <img src="" alt="Product preview" class="products__modal-image" />
+        <div class="products__modal-info">
+          <p class="products__modal-title"></p>
+          <p class="products__modal-price"></p>
+          <p class="products__modal-description"></p>
+        </div>
+      </div>
+
       <p class="products__modal-label">Color</p>
-      <div class="products__color-list"></div>
-      <p class="products__modal-label">Size</p>
-      <div class="products__sizes"></div>
-      <button type="button" class="products__add-to-cart">
+      <div class="products__modal-color-buttons"></div>
+
+      <div class="mt-5">
+        <label class="products__modal-label" for="products-size-select">Size</label>
+        <div class="products__modal-select-wrapper">
+          <select id="products-size-select" class="products__modal-select" aria-label="Size">
+            <option value="">Choose your size</option>
+          </select>
+          <span class="products__modal-select-icon">
+            <img src="{{ 'icon-chevron-right.svg' | asset_url }}" alt="" />
+          </span>
+        </div>
+      </div>
+
+      <button type="button" class="products__add-to-cart" disabled>
         ADD TO CART
-        <img src="{{ 'icon-add-to-cart.svg' | asset_url }}" alt="" />
+        <img src="{{ 'icon-arrow.svg' | asset_url }}" alt="" />
       </button>
     </div>
   </div>
@@ -400,6 +528,12 @@
           "id": "description",
           "label": "Description",
           "default": "A premium product with a refined finish."
+        },
+        {
+          "type": "text",
+          "id": "variant_id",
+          "label": "Variant ID",
+          "default": ""
         },
         {
           "type": "text",
