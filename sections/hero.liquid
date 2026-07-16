@@ -8,7 +8,7 @@
 
   .hero__header {
     background: #fff;
-    padding: 20px 24px;
+    padding: 10px 50px;
     border-bottom: 1px solid #e5e7eb;
     position: relative;
     z-index: 3;
@@ -20,8 +20,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 18px;
-    max-width: 1440px;
-    margin: 0 auto;
+    width:100%;
   }
 
   .hero__branding {
@@ -41,8 +40,7 @@
     flex: 1;
     min-width: 220px;
     text-align: center;
-    font-size: 0.875rem;
-    letter-spacing: 0.18em;
+    font-size: 1rem;
     text-transform: uppercase;
     color: #111;
   }
@@ -51,12 +49,55 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 14px 24px;
+    padding: 12px 40px;
     background: #ffeb3b;
     color: #111;
     text-transform: uppercase;
     font-weight: 700;
     text-decoration: none;
+    font-size: 1rem !important;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  .hero__button--header:hover {
+    background: #111;
+    color: #fff;
+  }
+
+  .hero__button--cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  .hero__button--cta:hover {
+    background: #ffeb3b;
+    color: #111;
+  }
+
+  .hero__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+  }
+
+  .hero__icon img {
+    width: 16px;
+    height: 16px;
+    display: block;
+    transition: filter 0.25s ease;
+  }
+
+  .hero__button--header:hover .hero__icon img,
+  .hero__button--cta:hover .hero__icon img {
+    filter: invert(1);
   }
 
   .hero__main {
@@ -174,9 +215,9 @@
       {% if section.settings.header_button_text != blank %}
         <a href="{{ section.settings.header_button_url | default: '#' }}" class="hero__button hero__button--header" aria-label="{{ section.settings.header_button_text | escape }}">
           {{ section.settings.header_button_text | escape }}
-          {% if section.settings.header_arrow_icon %}
-            {{ section.settings.header_arrow_icon | image_tag: alt: '', loading: 'lazy', decoding: 'async', class: 'hero__icon' }}
-          {% endif %}
+          <span class="hero__icon" aria-hidden="true">
+        <img src="{{ 'Line 15.svg' | asset_url }}" alt="" loading="lazy" decoding="async" />
+      </span>
         </a>
       {% endif %}
     </div>
@@ -220,9 +261,9 @@
     >
       <span>{{ section.settings.cta_button_text }}</span>
 
-      {% if section.settings.cta_arrow_icon %}
-        {{ section.settings.cta_arrow_icon | image_tag: alt: '', class: 'hero__icon' }}
-      {% endif %}
+      <span class="hero__icon" aria-hidden="true">
+        <img src="{{ 'Line 15 (1).svg' | asset_url }}" alt="" loading="lazy" decoding="async" />
+      </span>
     </a>
 
   </div>
@@ -301,7 +342,7 @@
       "type": "textarea",
       "id": "hero_description",
       "label": "Hero description",
-      "default": "Discover Joy: Your Ultimate Holiday Gift Destination."
+      "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season."
     },
     {
       "type": "text",
