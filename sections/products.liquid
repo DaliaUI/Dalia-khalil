@@ -1,0 +1,441 @@
+{% assign default_heading = section.settings.heading | default: 'Tisso vison in the wild' %}
+
+{% style %}
+  .products {
+    background: #ffffff;
+    color: #111111;
+    font-family: 'Jost', sans-serif;
+  }
+
+  .products__inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 3rem 1.25rem 4rem;
+  }
+
+  .products__heading {
+    margin: 0 0 1.75rem;
+    font-size: clamp(2rem, 3.25vw, 2.25rem);
+    line-height: 1.05;
+    font-weight: 500;
+  }
+
+  .products__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .products__card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    min-height: 0;
+  }
+
+  .products__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+  .products__button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.95);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .products__button:hover {
+    transform: translateY(-1px);
+    background: #000000;
+  }
+
+  .products__button img {
+    width: 18px;
+    height: 18px;
+    display: block;
+    filter: invert(0);
+    transition: filter 0.2s ease;
+  }
+
+  .products__button:hover img {
+    filter: invert(1);
+  }
+
+  .products__modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+    padding: 1.5rem;
+  }
+
+  .products__modal--open {
+    display: flex;
+  }
+
+  .products__modal-dialog {
+    width: min(100%, 420px);
+    max-height: calc(100vh - 3rem);
+    overflow: auto;
+    border-radius: 28px;
+    background: #ffffff;
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .products__modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    background: transparent;
+    color: #111111;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .products__modal-image {
+    width: 100%;
+    border-radius: 18px;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    margin-bottom: 1.25rem;
+  }
+
+  .products__modal-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.75rem;
+    line-height: 1.05;
+    font-weight: 700;
+  }
+
+  .products__modal-price {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    color: #374151;
+  }
+
+  .products__modal-description {
+    margin: 0 1.5rem 1.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #4b5563;
+  }
+
+  .products__modal-label {
+    margin: 1rem 0 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #111111;
+  }
+
+  .products__color-list,
+  .products__sizes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .products__color-pill,
+  .products__size-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 46px;
+    height: 38px;
+    border-radius: 9999px;
+    border: 1px solid #111111;
+    background: #ffffff;
+    color: #111111;
+    font-size: 0.95rem;
+    padding: 0 0.75rem;
+    white-space: nowrap;
+  }
+
+  .products__add-to-cart {
+    width: 100%;
+    border: 0;
+    background: #111111;
+    color: #ffffff;
+    font-size: 1rem;
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .products__add-to-cart img {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .products__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+  }
+{% endstyle %}
+
+<section id="products-{{ section.id }}" class="products">
+  <div class="products__inner">
+    <h2 class="products__heading">{{ default_heading }}</h2>
+
+    <div class="products__grid">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% assign image_src = block.settings.image | img_url: '720x' %}
+          {% if image_src == blank %}
+            {% assign fallback_images = 'image 822.jpg,image 823.jpg,image 824.jpg,image 825.jpg,image 826.jpg,image 827.jpg' | split: ',' %}
+            {% assign image_src = fallback_images[forloop.index0] | strip | asset_url %}
+          {% endif %}
+
+          <div class="products__card">
+            <img
+              src="{{ image_src }}"
+              alt="{{ block.settings.title | escape }}"
+              class="products__image"
+            />
+            <button
+              type="button"
+              class="products__button"
+              data-product-title="{{ block.settings.title | escape }}"
+              data-product-price="{{ block.settings.price | escape }}"
+              data-product-description="{{ block.settings.description | escape }}"
+              data-product-colors="{{ block.settings.colors | escape }}"
+              data-product-sizes="{{ block.settings.sizes | escape }}"
+              data-product-image="{{ image_src }}"
+            >
+              <img src="{{ 'icon-plus.svg' | asset_url }}" alt="Open product details" />
+            </button>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="products__card">
+          <img src="{{ 'image 822.jpg' | asset_url }}" alt="Tisso Vison product" class="products__image" />
+          <button
+            type="button"
+            class="products__button"
+            data-product-title="Tisso Vison Wrap Dress"
+            data-product-price="$220"
+            data-product-description="This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief."
+            data-product-colors="Blue, Red, Grey"
+            data-product-sizes="XS, S, M"
+            data-product-image="{{ 'image 822.jpg' | asset_url }}"
+          >
+            <img src="{{ 'icon-plus.svg' | asset_url }}" alt="Open product details" />
+          </button>
+        </div>
+
+        <div class="products__card">
+          <img src="{{ 'image 823.jpg' | asset_url }}" alt="Tisso Vison product" class="products__image" />
+          <button
+            type="button"
+            class="products__button"
+            data-product-title="Tisso Vison Leather Tote"
+            data-product-price="$185"
+            data-product-description="A modern leather tote with a sculptural handle and premium lining for everyday wear."
+            data-product-colors="Black, White, Beige"
+            data-product-sizes="One Size"
+            data-product-image="{{ 'image 823.jpg' | asset_url }}"
+          >
+            <img src="{{ 'icon-plus.svg' | asset_url }}" alt="Open product details" />
+          </button>
+        </div>
+
+        <div class="products__card">
+          <img src="{{ 'image 824.jpg' | asset_url }}" alt="Tisso Vison product" class="products__image" />
+          <button
+            type="button"
+            class="products__button"
+            data-product-title="Tisso Vison Silk Scarf"
+            data-product-price="$95"
+            data-product-description="Lightweight silk scarf with a refined print, perfect for styling every outfit."
+            data-product-colors="Blue, Red, Grey"
+            data-product-sizes="One Size"
+            data-product-image="{{ 'image 824.jpg' | asset_url }}"
+          >
+            <img src="{{ 'icon-plus.svg' | asset_url }}" alt="Open product details" />
+          </button>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="products__modal" aria-hidden="true">
+    <div class="products__modal-dialog">
+      <button type="button" class="products__modal-close" aria-label="Close product details">×</button>
+      <img src="" alt="Product preview" class="products__modal-image" />
+      <h3 class="products__modal-title"></h3>
+      <p class="products__modal-price"></p>
+      <p class="products__modal-description"></p>
+      <p class="products__modal-label">Color</p>
+      <div class="products__color-list"></div>
+      <p class="products__modal-label">Size</p>
+      <div class="products__sizes"></div>
+      <button type="button" class="products__add-to-cart">
+        ADD TO CART
+        <img src="{{ 'icon-add-to-cart.svg' | asset_url }}" alt="" />
+      </button>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.getElementById('products-{{ section.id }}');
+    if (!section) return;
+
+    const modal = section.querySelector('.products__modal');
+    const modalImage = section.querySelector('.products__modal-image');
+    const modalTitle = section.querySelector('.products__modal-title');
+    const modalPrice = section.querySelector('.products__modal-price');
+    const modalDescription = section.querySelector('.products__modal-description');
+    const modalColors = section.querySelector('.products__color-list');
+    const modalSizes = section.querySelector('.products__sizes');
+    const closeButton = section.querySelector('.products__modal-close');
+    const addToCartButton = section.querySelector('.products__add-to-cart');
+
+    function renderChoices(container, values, className) {
+      container.innerHTML = '';
+      values.forEach(function (value) {
+        if (!value) return;
+        const pill = document.createElement('span');
+        pill.className = className;
+        pill.textContent = value.trim();
+        container.appendChild(pill);
+      });
+    }
+
+    function closeModal() {
+      modal.classList.remove('products__modal--open');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    function openModal(data) {
+      modalImage.src = data.productImage;
+      modalImage.alt = data.productTitle;
+      modalTitle.textContent = data.productTitle;
+      modalPrice.textContent = data.productPrice;
+      modalDescription.textContent = data.productDescription;
+
+      const colors = data.productColors ? data.productColors.split(',').map(function (item) { return item.trim(); }) : [];
+      const sizes = data.productSizes ? data.productSizes.split(',').map(function (item) { return item.trim(); }) : [];
+
+      renderChoices(modalColors, colors, 'products__color-pill');
+      renderChoices(modalSizes, sizes, 'products__size-pill');
+
+      modal.classList.add('products__modal--open');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    section.querySelectorAll('.products__button').forEach(function (button) {
+      button.addEventListener('click', function () {
+        openModal(button.dataset);
+      });
+    });
+
+    closeButton.addEventListener('click', closeModal);
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    addToCartButton.addEventListener('click', function () {
+      closeModal();
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Products",
+  "tag": "section",
+  "class": "section-products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Tisso vison in the wild"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product title",
+          "default": "Tisso Vison Product"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$120"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "A premium product with a refined finish."
+        },
+        {
+          "type": "text",
+          "id": "colors",
+          "label": "Colors (comma separated)",
+          "default": "Blue, Red, Grey"
+        },
+        {
+          "type": "text",
+          "id": "sizes",
+          "label": "Sizes (comma separated)",
+          "default": "XS, S, M"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Products"
+    }
+  ]
+}
+{% endschema %}
