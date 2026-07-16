@@ -195,9 +195,8 @@
 
   .hero__content {
     position: absolute;
-    left: 40px;
-    top: 180px;
-      max-width: 480px;
+    top:  265px;
+  max-width: 480px;
   z-index: 2;
   text-align: left;
     padding: 0;
