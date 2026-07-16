@@ -6,7 +6,8 @@
     --hero-padding-top: {{ section.settings.padding_top | default: 0 }}px;
     --hero-padding-bottom: {{ section.settings.padding_bottom | default: 0 }}px;
   }
-  .hero__header { position: relative; z-index: 4; }
+  .hero__header { position: relative; z-index: 9999 !important; }
+  .hero__media-wrapper { z-index: 0 !important; }
 {% endstyle %}
 
 <section id="hero-{{ section.id }}" class="hero">
