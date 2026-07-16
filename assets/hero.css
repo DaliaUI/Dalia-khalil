@@ -194,10 +194,10 @@
   .hero__content {
     position: absolute;
     left: 40px;
-    top: 390px;
-    max-width: 420px;
-    z-index: 2;
-    text-align: left;
+    top: 180px;
+      max-width: 480px;
+  z-index: 2;
+  text-align: left;
     padding: 0;
   }
 
@@ -221,6 +221,6 @@
   }
 
   .hero__main {
-    min-height: 460px;
+    min-height: 780px;
   }
 }
