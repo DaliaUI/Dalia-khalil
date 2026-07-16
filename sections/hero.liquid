@@ -7,7 +7,8 @@
     --hero-padding-bottom: {{ section.settings.padding_bottom | default: 0 }}px;
   }
   .hero__header { position: relative; z-index: 9999 !important; }
-  .hero__media-wrapper { z-index: -1 !important; position: absolute; inset: 0; }
+  .hero__media-wrapper { display: none !important; }
+  .hero__content { position: relative; background-repeat: no-repeat; background-size: cover; background-position: left center; }
 {% endstyle %}
 
 <section id="hero-{{ section.id }}" class="hero">
@@ -51,78 +52,67 @@
   </header>
 
   <main class="hero__main">
-    <div class="hero__content">
+    <div class="hero__content hero__content--mobile" style="{% if section.settings.mobile_image %}background-image: url({{ section.settings.mobile_image | image_url: width: 1200 }});{% elsif section.settings.desktop_image %}background-image: url({{ section.settings.desktop_image | image_url: width: 1200 }});{% else %}background-image: url({{ 'banner.png' | asset_url }});{% endif %}">
+      {% assign has_text = false %}
+      {% assign has_button = false %}
       {% for block in section.blocks %}
         {% case block.type %}
           {% when 'text' %}
+            {% assign has_text = true %}
             <div class="hero__text-block" {{ block.shopify_attributes }}>
               {{ block.settings.text }}
             </div>
           {% when 'button' %}
+            {% assign has_button = true %}
+        {% endcase %}
+      {% endfor %}
+
+      {% if has_button %}
+        {% for block in section.blocks %}
+          {% if block.type == 'button' %}
             <a
               href="{{ block.settings.link | default: '#' }}"
-              class="hero__button hero__button--cta {{ block.settings.style_class | default: 'button-custom' }}"
+              class="hero__button hero__button--cta hero__button--cta-mobile {{ block.settings.style_class | default: 'button-custom' }}"
               aria-label="{{ block.settings.label | escape }}"
               {% if block.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
               {% if block.settings.custom_button_background != blank %}style="background-color: {{ block.settings.custom_button_background }};"{% endif %}
               {{ block.shopify_attributes }}
             >
               <span>{{ block.settings.label | escape }}</span>
-              {% if section.settings.cta_arrow_icon %}
-                {{ section.settings.cta_arrow_icon | image_tag: alt: '', loading: 'lazy', decoding: 'async', class: 'hero__icon' }}
-              {% else %}
-                <span class="hero__icon hero__icon--placeholder" aria-hidden="true">{{ 'image' | placeholder_svg_tag: 'hero__icon-placeholder' }}</span>
-              {% endif %}
             </a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="hero__content hero__content--desktop" style="{% if section.settings.desktop_image %}background-image: url({{ section.settings.desktop_image | image_url: width: 1600 }});{% elsif section.settings.mobile_image %}background-image: url({{ section.settings.mobile_image | image_url: width: 1200 }});{% else %}background-image: url({{ 'banner.png' | asset_url }});{% endif %}">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'text' %}
+            <div class="hero__text-block" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+            </div>
         {% endcase %}
+      {% endfor %}
+
+      {% for block in section.blocks %}
+        {% if block.type == 'button' %}
+          <a
+            href="{{ block.settings.link | default: '#' }}"
+            class="hero__button hero__button--cta hero__button--cta-desktop {{ block.settings.style_class | default: 'button-custom' }}"
+            aria-label="{{ block.settings.label | escape }}"
+            {% if block.settings.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+            {% if block.settings.custom_button_background != blank %}style="background-color: {{ block.settings.custom_button_background }};"{% endif %}
+            {{ block.shopify_attributes }}
+          >
+            <span>{{ block.settings.label | escape }}</span>
+          </a>
+        {% endif %}
       {% endfor %}
     </div>
 
-    <div class="hero__media-wrapper">
-      <picture class="hero__media">
-        {% if section.settings.mobile_image %}
-          <source media="(max-width: 767px)" srcset="{{ section.settings.mobile_image | image_url: width: 800, format: 'pjpg' }}" />
-        {% endif %}
-
-        {% if section.settings.desktop_image %}
-          <img
-            class="hero__image"
-            src="{{ section.settings.desktop_image | image_url: width: 1440, format: 'pjpg' }}"
-            srcset="{{ section.settings.desktop_image | image_url: width: 1440, format: 'pjpg' }} 1x, {{ section.settings.desktop_image | image_url: width: 2400, format: 'pjpg' }} 2x"
-            alt="{{ section.settings.hero_title | default: 'Hero image' | escape }}"
-            loading="eager"
-            decoding="async"
-          />
-        {% elsif section.settings.mobile_image %}
-          <img
-            class="hero__image"
-            src="{{ section.settings.mobile_image | image_url: width: 800, format: 'pjpg' }}"
-            alt="{{ section.settings.hero_title | default: 'Hero image' | escape }}"
-            loading="eager"
-            decoding="async"
-          />
-        {% else %}
-          <img
-            class="hero__image"
-            src="{{ 'banner.png' | asset_url }}"
-            alt="{{ section.settings.hero_title | default: 'Hero image' | escape }}"
-            loading="eager"
-            decoding="async"
-          />
-        {% else %}
-          <div class="hero__image hero__image--placeholder" aria-hidden="true">
-            {{ 'image' | placeholder_svg_tag: 'hero__placeholder-image' }}
-          </div>
-        {% endif %}
-      </picture>
-    </div>
   </main>
 
-  {% if section.settings.footer_announcement != blank %}
-    <footer class="hero__footer">
-      <p class="hero__announcement hero__announcement--footer">{{ section.settings.footer_announcement | escape }}</p>
-    </footer>
-  {% endif %}
 </section>
 
 {% schema %}
