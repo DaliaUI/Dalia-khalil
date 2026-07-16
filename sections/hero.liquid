@@ -1,4 +1,4 @@
-{% stylesheet 'hero.css' %}
+{{ 'hero.css' | asset_url | stylesheet_tag }}
 
 {% style %}
   .hero {
@@ -9,7 +9,7 @@
 
 <section id="hero-{{ section.id }}" class="hero">
   <header class="hero__header">
-    <div class="hero__branding" aria-label="Branding">
+    <div class="hero__branding">
       {% if section.settings.logo_1 %}
         <div class="hero__brand-mark">
           {{ section.settings.logo_1 | image_tag: alt: section.settings.logo_1_alt, loading: 'lazy', decoding: 'async' }}
@@ -36,25 +36,19 @@
     {% endif %}
 
     {% if section.settings.header_button_text != blank %}
-      <a
-        href="{{ section.settings.header_button_url | default: '#' }}"
-        class="hero__button hero__button--header"
-        aria-label="{{ section.settings.header_button_text | escape }}"
-      >
+      <a href="{{ section.settings.header_button_url | default: '#' }}" class="hero__button hero__button--header" aria-label="{{ section.settings.header_button_text | escape }}">
         {{ section.settings.header_button_text }}
         {% if section.settings.header_arrow_icon %}
           {{ section.settings.header_arrow_icon | image_tag: alt: '', loading: 'lazy', decoding: 'async', class: 'hero__icon' }}
         {% else %}
-          <span class="hero__icon hero__icon--placeholder" aria-hidden="true">
-            {{ 'image' | placeholder_svg_tag: 'hero__icon-placeholder' }}
-          </span>
+          <span class="hero__icon hero__icon--placeholder" aria-hidden="true">{{ 'image' | placeholder_svg_tag: 'hero__icon-placeholder' }}</span>
         {% endif %}
       </a>
     {% endif %}
   </header>
 
   <main class="hero__main">
-    <div class="hero__content">
+    <div class="hero__content hero__content--mobile">
       {% if section.settings.hero_title != blank %}
         <h1 class="hero__title">{{ section.settings.hero_title }}</h1>
       {% endif %}
@@ -65,32 +59,60 @@
     </div>
 
     {% if section.settings.cta_button_text != blank %}
-      <a
-        href="{{ section.settings.cta_button_url | default: '#' }}"
-        class="hero__button hero__button--cta"
-        aria-label="{{ section.settings.cta_button_text | escape }}"
-      >
+      <a href="{{ section.settings.cta_button_url | default: '#' }}" class="hero__button hero__button--cta hero__button--cta-mobile" aria-label="{{ section.settings.cta_button_text | escape }}">
         {{ section.settings.cta_button_text }}
         {% if section.settings.cta_arrow_icon %}
           {{ section.settings.cta_arrow_icon | image_tag: alt: '', loading: 'lazy', decoding: 'async', class: 'hero__icon' }}
         {% else %}
-          <span class="hero__icon hero__icon--placeholder" aria-hidden="true">
-            {{ 'image' | placeholder_svg_tag: 'hero__icon-placeholder' }}
-          </span>
+          <span class="hero__icon hero__icon--placeholder" aria-hidden="true">{{ 'image' | placeholder_svg_tag: 'hero__icon-placeholder' }}</span>
         {% endif %}
       </a>
     {% endif %}
 
+    <div class="hero__content hero__content--desktop">
+      {% if section.settings.hero_title != blank %}
+        <h1 class="hero__title">{{ section.settings.hero_title }}</h1>
+      {% endif %}
+
+      {% if section.settings.hero_description != blank %}
+        <p class="hero__description">{{ section.settings.hero_description }}</p>
+      {% endif %}
+
+      {% if section.settings.cta_button_text != blank %}
+        <a href="{{ section.settings.cta_button_url | default: '#' }}" class="hero__button hero__button--cta hero__button--cta-desktop" aria-label="{{ section.settings.cta_button_text | escape }}">
+          {{ section.settings.cta_button_text }}
+          {% if section.settings.cta_arrow_icon %}
+            {{ section.settings.cta_arrow_icon | image_tag: alt: '', loading: 'lazy', decoding: 'async', class: 'hero__icon' }}
+          {% else %}
+            <span class="hero__icon hero__icon--placeholder" aria-hidden="true">{{ 'image' | placeholder_svg_tag: 'hero__icon-placeholder' }}</span>
+          {% endif %}
+        </a>
+      {% endif %}
+    </div>
+
     <div class="hero__media-wrapper">
       <picture class="hero__media">
         {% if section.settings.mobile_image %}
-          <source media="(max-width: 767px)" srcset="{{ section.settings.mobile_image | image_url: width: 900 }}" />
+          <source media="(max-width: 767px)" srcset="{{ section.settings.mobile_image | image_url: width: 800 }}" />
         {% endif %}
 
         {% if section.settings.desktop_image %}
-          {{ section.settings.desktop_image | image_tag: alt: section.settings.hero_title, loading: 'eager', decoding: 'async', class: 'hero__image' }}
+          <img
+            class="hero__image"
+            src="{{ section.settings.desktop_image | image_url: width: 1440 }}"
+            srcset="{{ section.settings.desktop_image | image_url: width: 1440 }} 1x, {{ section.settings.desktop_image | image_url: width: 2400 }} 2x"
+            alt="{{ section.settings.hero_title | escape }}"
+            loading="eager"
+            decoding="async"
+          />
         {% elsif section.settings.mobile_image %}
-          {{ section.settings.mobile_image | image_tag: alt: section.settings.hero_title, loading: 'eager', decoding: 'async', class: 'hero__image' }}
+          <img
+            class="hero__image"
+            src="{{ section.settings.mobile_image | image_url: width: 800 }}"
+            alt="{{ section.settings.hero_title | escape }}"
+            loading="eager"
+            decoding="async"
+          />
         {% else %}
           <div class="hero__image hero__image--placeholder" aria-hidden="true">
             {{ 'image' | placeholder_svg_tag: 'hero__placeholder-image' }}
