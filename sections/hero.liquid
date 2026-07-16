@@ -6,6 +6,7 @@
     --hero-padding-top: {{ section.settings.padding_top | default: 0 }}px;
     --hero-padding-bottom: {{ section.settings.padding_bottom | default: 0 }}px;
   }
+  .hero__header { position: relative; z-index: 4; }
 {% endstyle %}
 
 <section id="hero-{{ section.id }}" class="hero">
@@ -13,21 +14,21 @@
     <div class="hero__branding">
       {% if section.settings.logo_1 %}
         <div class="hero__brand-mark">
-          {{ section.settings.logo_1 | image_tag: alt: section.settings.logo_1_alt | default: 'Logo 1', loading: 'lazy', decoding: 'async' }}
+          {{ section.settings.logo_1 | image_tag: alt: section.settings.logo_1_alt, loading: 'lazy', decoding: 'async' }}
         </div>
       {% else %}
-        <div class="hero__brand-mark hero__brand-mark--placeholder" aria-hidden="true">
-          {{ 'image' | placeholder_svg_tag: 'hero__placeholder' }}
+        <div class="hero__brand-mark">
+          <img src="{{ 'Group 1000007777.svg' | asset_url }}" alt="{{ section.settings.logo_1_alt | default: 'Logo 1' }}" loading="lazy" decoding="async" />
         </div>
       {% endif %}
 
       {% if section.settings.logo_2 %}
         <div class="hero__brand-mark">
-          {{ section.settings.logo_2 | image_tag: alt: section.settings.logo_2_alt | default: 'Logo 2', loading: 'lazy', decoding: 'async' }}
+          {{ section.settings.logo_2 | image_tag: alt: section.settings.logo_2_alt, loading: 'lazy', decoding: 'async' }}
         </div>
       {% else %}
-        <div class="hero__brand-mark hero__brand-mark--placeholder" aria-hidden="true">
-          {{ 'image' | placeholder_svg_tag: 'hero__placeholder' }}
+        <div class="hero__brand-mark">
+          <img src="{{ 'Group 1000008197.png' | asset_url }}" alt="{{ section.settings.logo_2_alt | default: 'Logo 2' }}" loading="lazy" decoding="async" />
         </div>
       {% endif %}
     </div>
@@ -87,6 +88,14 @@
             class="hero__image"
             src="{{ section.settings.desktop_image | image_url: width: 1440, format: 'pjpg' }}"
             srcset="{{ section.settings.desktop_image | image_url: width: 1440, format: 'pjpg' }} 1x, {{ section.settings.desktop_image | image_url: width: 2400, format: 'pjpg' }} 2x"
+            alt="{{ section.settings.hero_title | default: 'Hero image' | escape }}"
+            loading="eager"
+            decoding="async"
+          />
+        {% elsif 'banner.png' in assets %}
+          <img
+            class="hero__image"
+            src="{{ 'banner.png' | asset_url }}"
             alt="{{ section.settings.hero_title | default: 'Hero image' | escape }}"
             loading="eager"
             decoding="async"
