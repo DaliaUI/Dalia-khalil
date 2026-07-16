@@ -73,9 +73,11 @@
   gap: 18px;
   border: 0;
   padding: 12px 24px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1;
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
   text-decoration: none;
   cursor: pointer;
 }
