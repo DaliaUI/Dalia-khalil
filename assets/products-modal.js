@@ -18,15 +18,27 @@ function initProductModals() {
 
     const buttons = section.querySelectorAll('.products__button');
 
-    console.debug('[products-modal] section init', section.id || 'unknown', 'modal?', !!modal, 'buttons?', buttons.length, 'close?', !!closeButton, 'addToCart?', !!addToCartButton);
+    const sectionId = section.id || 'unknown';
+    const missingElements = [];
+    if (!modal) missingElements.push('products__modal');
+    if (!modalImage) missingElements.push('products__modal-image');
+    if (!modalTitle) missingElements.push('products__modal-title');
+    if (!modalPrice) missingElements.push('products__modal-price');
+    if (!modalDescription) missingElements.push('products__modal-description');
+    if (!colorButtonsContainer) missingElements.push('products__modal-color-buttons');
+    if (!sizeSelect) missingElements.push('products__modal-select');
+    if (!closeButton) missingElements.push('products__modal-close');
+    if (!addToCartButton) missingElements.push('products__add-to-cart');
 
-    if (!modal || !modalImage || !modalTitle || !modalPrice || !modalDescription || !colorButtonsContainer || !sizeSelect || !closeButton || !addToCartButton) {
-      console.error('[products-modal] section missing required modal elements', section.id || 'unknown');
+    console.debug('[products-modal] section init', sectionId, 'buttons?', buttons.length, 'missing?', missingElements.join(', ') || 'none');
+
+    if (missingElements.length) {
+      console.warn('[products-modal] skipping section because required modal elements are missing:', sectionId, missingElements.join(', '));
       return;
     }
 
     if (!buttons.length) {
-      console.warn('[products-modal] no product buttons found in section', section.id || 'unknown');
+      console.warn('[products-modal] no product buttons found in section', sectionId);
     }
 
     let selectedColor = '';
