@@ -220,7 +220,130 @@
     opacity: 0.45;
     cursor: not-allowed;
   }
+.products__modal-dialog {
+  width: 360px;
+  background: #fff;
+  border-radius: 0;
+  padding: 24px;
+  position: relative;
+}
 
+.products__modal-top {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.products__modal-image {
+  width: 120px;
+  height: 160px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.products__modal-info {
+  flex: 1;
+}
+
+.products__modal-title {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 0 16px;
+}
+
+.products__modal-price {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 16px;
+}
+
+.products__modal-description {
+  font-size: 14px;
+  line-height: 1.2;
+  color: #111;
+  margin: 0;
+}
+
+.products__modal-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.products__modal-section {
+  margin-bottom: 24px;
+}
+
+.products__modal-color-buttons {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 0;
+}
+
+.products__modal-color-button {
+  height: 48px;
+  border: 1px solid #111;
+  border-radius: 0;
+  background: #fff;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.products__modal-color-button--selected {
+  border-left: 4px solid #1f4fbf;
+  background: #fff;
+  color: #111;
+}
+
+.products__modal-select-wrapper {
+  position: relative;
+}
+
+.products__modal-select {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #111;
+  border-radius: 0;
+  padding: 0 60px 0 16px;
+  appearance: none;
+  background: #fff;
+}
+
+.products__modal-select-icon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.products__add-to-cart {
+  width: 100%;
+  height: 52px;
+  border: none;
+  background: #000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.products__modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+}
   @media screen and (min-width: 1024px) {
     .products__grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -364,37 +487,85 @@
   </div>
 
   <div class="products__modal" aria-hidden="true">
-    <div class="products__modal-dialog">
-      <button type="button" class="products__modal-close" aria-label="Close product details">×</button>
-      <div class="products__modal-header">
-        <img src="" alt="Product preview" class="products__modal-image" />
-        <div class="products__modal-info">
-          <h3 class="products__modal-title"></h3>
-          <p class="products__modal-price"></p>
-          <p class="products__modal-description"></p>
-        </div>
-      </div>
+  <div class="products__modal-dialog">
 
-      <p class="products__modal-label">Color</p>
-      <div class="products__modal-color-buttons"></div>
+  <button
+    type="button"
+    class="products__modal-close"
+    aria-label="Close product details">
+    ×
+  </button>
 
-      <div class="mt-5">
-        <label class="products__modal-label" for="products-size-select">Size</label>
-        <div class="products__modal-select-wrapper">
-          <select id="products-size-select" class="products__modal-select" aria-label="Size">
-            <option value="">Choose your size</option>
-          </select>
-          <span class="products__modal-select-icon">
-            <img src="{{ 'icon-chevron-right.svg' | asset_url }}" alt="" />
-          </span>
-        </div>
-      </div>
+  <div class="products__modal-top">
 
-      <button type="button" class="products__add-to-cart" disabled>
-        ADD TO CART
-        <img src="{{ 'icon-arrow.svg' | asset_url }}" alt="" />
-      </button>
+    <img
+      src=""
+      alt="Product preview"
+      class="products__modal-image"
+    >
+
+    <div class="products__modal-info">
+
+      <h3 class="products__modal-title"></h3>
+
+      <p class="products__modal-price"></p>
+
+      <p class="products__modal-description"></p>
+
     </div>
+
+  </div>
+
+  <div class="products__modal-section">
+
+    <label class="products__modal-label">
+      Color
+    </label>
+
+    <div class="products__modal-color-buttons"></div>
+
+  </div>
+
+  <div class="products__modal-section">
+
+    <label
+      class="products__modal-label"
+      for="products-size-select">
+      Size
+    </label>
+
+    <div class="products__modal-select-wrapper">
+
+      <select
+        id="products-size-select"
+        class="products__modal-select">
+
+        <option value="">
+          Choose your size
+        </option>
+
+      </select>
+
+      <span class="products__modal-select-icon">
+        ▼
+      </span>
+
+    </div>
+
+  </div>
+
+  <button
+    type="button"
+    class="products__add-to-cart"
+    disabled>
+
+    <span>ADD TO CART</span>
+
+    <span>→</span>
+
+  </button>
+
+</div>
   </div>
 </section>
 
