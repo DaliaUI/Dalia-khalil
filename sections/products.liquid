@@ -90,260 +90,125 @@
     display: flex;
   }
 
-  .products__modal-dialog {
-    width: min(100%, 520px);
-    max-height: calc(100vh - 3rem);
-    overflow: auto;
-    border-radius: 32px;
-    background: #ffffff;
-    padding: 2rem;
-    position: relative;
-  }
-
-  .products__modal-close {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    width: 40px;
-    height: 40px;
-    border: 0;
-    background: transparent;
-    color: #111111;
-    font-size: 1.75rem;
-    line-height: 1;
-    cursor: pointer;
-  }
-
-  .products__modal-header {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-    align-items: flex-start;
-  }
-
-  .products__modal-image {
-    width: 180px;
-    height: 180px;
-    border-radius: 26px;
-    object-fit: cover;
-    flex-shrink: 0;
-  }
-
-  .products__modal-info {
-    flex: 1;
-  }
-
-  .products__modal-title {
-    margin: 0 0 0.5rem;
-    font-size: 1.95rem;
-    line-height: 1.05;
-    font-weight: 700;
-  }
-
-  .products__modal-price {
-    margin: 0 0 1rem;
-    color: #111111;
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
-
-  .products__modal-description {
-    margin: 0;
-    color: #4b5563;
-    font-size: 0.98rem;
-    line-height: 1.8;
-  }
-
-  .products__modal-label {
-    margin: 1.25rem 0 0.75rem;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #111111;
-  }
-
-  .products__modal-color-buttons {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
-  }
-
-  .products__modal-color-button {
-    min-height: 70px;
-    border: 2px solid #111111;
-    border-radius: 1rem;
-    background: #ffffff;
-    color: #111111;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-  }
-
-  .products__modal-color-button--selected {
-    background: #111111;
-    color: #ffffff;
-    border-color: #111111;
-  }
-
-  .products__modal-select-wrapper {
-    position: relative;
-  }
-
-  .products__modal-select {
-    width: 100%;
-    height: 56px;
-    border: 1px solid #111111;
-    border-radius: 0.75rem;
-    padding: 0 3rem 0 1rem;
-    font-size: 1.125rem;
-    appearance: none;
-    background: #ffffff;
-    color: #111111;
-  }
-
-  .products__modal-select-icon {
-    pointer-events: none;
-    position: absolute;
-    inset-y: 0;
-    right: 1rem;
-    display: flex;
-    align-items: center;
-  }
-
-  .products__add-to-cart:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-  }
-.products__modal-dialog {
-  width: 360px;
+ .products__modal-dialog {
+  width: 100%;
+  max-width: 420px;
   background: #fff;
+  padding: 20px;
   border-radius: 0;
-  padding: 24px;
   position: relative;
 }
 
 .products__modal-top {
   display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  margin-bottom: 24px;
+  gap: 16px;
+  padding-right: 20px;
 }
 
 .products__modal-image {
   width: 120px;
-  height: 160px;
+  height: 140px;
   object-fit: cover;
   flex-shrink: 0;
 }
 
-.products__modal-info {
-  flex: 1;
-}
-
 .products__modal-title {
-  font-size: 18px;
+  margin: 0 0 8px;
+  font-size: 16px;
   font-weight: 400;
-  margin: 0 0 16px;
 }
 
 .products__modal-price {
-  font-size: 20px;
-  font-weight: 400;
-  margin: 0 0 16px;
+  margin: 0 0 8px;
+  font-size: 18px;
 }
 
 .products__modal-description {
   font-size: 14px;
-  line-height: 1.2;
-  color: #111;
-  margin: 0;
+  line-height: 1.5;
+  color: #555;
 }
 
 .products__modal-label {
   display: block;
-  margin-bottom: 10px;
-  font-size: 14px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  font-size: 18px;
   font-weight: 400;
   text-transform: none;
   letter-spacing: normal;
 }
 
-.products__modal-section {
-  margin-bottom: 24px;
-}
-
 .products__modal-color-buttons {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 0;
+  display: flex;
 }
 
 .products__modal-color-button {
-  height: 48px;
-  border: 1px solid #111;
-  border-radius: 0;
-  background: #fff;
-  font-size: 16px;
-  font-weight: 400;
+  position: relative;
+  flex: 1;
+  height: 56px;
+  border: 1px solid #000;
+  background: white;
+  padding-left: 20px;
+  text-align: left;
+  font-size: 20px;
 }
 
-.products__modal-color-button--selected {
-  border-left: 4px solid #1f4fbf;
+.products__modal-color-button.active {
+  background: #000;
+  color: #fff;
+}
+
+.products__modal-color-button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+}
+
+.products__modal-select {
+  width: 100%;
+  height: 56px;
+  border: 1px solid #000;
+  padding: 0 76px 0 16px;
+  appearance: none;
+  font-size: 20px;
   background: #fff;
-  color: #111;
 }
 
 .products__modal-select-wrapper {
   position: relative;
 }
 
-.products__modal-select {
-  width: 100%;
-  height: 50px;
-  border: 1px solid #111;
-  border-radius: 0;
-  padding: 0 60px 0 16px;
-  appearance: none;
-  background: #fff;
-}
-
 .products__modal-select-icon {
   position: absolute;
-  right: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
+  right: 0;
+  top: 0;
+  width: 76px;
+  height: 100%;
+  border-left: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .products__add-to-cart {
+  margin-top: 64px;
   width: 100%;
-  height: 52px;
-  border: none;
+  height: 64px;
+  border: 0;
   background: #000;
   color: #fff;
+  font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 48px;
-  font-size: 16px;
+  gap: 18px;
   cursor: pointer;
 }
 
-.products__modal-close {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  border: none;
-  background: transparent;
-  font-size: 28px;
-  cursor: pointer;
-}
   @media screen and (min-width: 1024px) {
     .products__grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -498,23 +363,82 @@
 
   <div class="products__modal-top">
 
-    <img
-      src=""
-      alt="Product preview"
-      class="products__modal-image"
-    >
+  <img
+    src=""
+    alt="Product preview"
+    class="products__modal-image"
+  >
 
-    <div class="products__modal-info">
+  <div class="products__modal-info">
 
-      <h3 class="products__modal-title"></h3>
+    <p class="products__modal-title"></p>
 
-      <p class="products__modal-price"></p>
+    <p class="products__modal-price"></p>
 
-      <p class="products__modal-description"></p>
-
-    </div>
+    <p class="products__modal-description"></p>
 
   </div>
+
+</div>
+
+<p class="products__modal-label">
+  Color
+</p>
+
+<div class="products__modal-color-buttons">
+</div>
+
+<div class="products__modal-size">
+
+  <label
+    for="products-size-select"
+    class="products__modal-label">
+
+    Size
+
+  </label>
+
+  <div class="products__modal-select-wrapper">
+
+    <select
+      id="products-size-select"
+      class="products__modal-select">
+
+      <option value="">
+        Choose your size
+      </option>
+
+    </select>
+
+   <span class="products__modal-select-icon">
+  <img
+    src="{{ 'Vector.svg' | asset_url }}"
+    alt=""
+    width="16"
+    height="10"
+  >
+</span>
+
+  </div>
+
+</div>
+
+<button
+  type="button"
+  class="products__add-to-cart">
+
+  <span>ADD TO CART</span>
+
+  <span class="products__add-to-cart-icon">
+  <img
+    src="{{ 'Line 15 (1).svg' | asset_url }}"
+    alt=""
+    width="38"
+    height="12"
+  >
+</span>
+
+</button>
 
   <div class="products__modal-section">
 
