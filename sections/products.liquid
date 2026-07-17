@@ -39,22 +39,21 @@
     object-fit: cover;
   }
 
-  .products__button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 22px;
-    height: 22px;
-    border: 0;
-    border-radius: 9999px;
-    background: #F8F8F8E5;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
-    transition: transform 0.2s ease, background-color 0.2s ease;
-  }
+ .products__button {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 9999px;
+  background: #F8F8F8E5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 12px 32px rgba(0,0,0,.14);
+  transition: transform .2s ease, background-color .2s ease;
+  transform: translate(50%, -50%);
+}
 
   .products__button:hover {
     transform: translateY(-1px);
