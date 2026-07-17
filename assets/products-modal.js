@@ -194,11 +194,12 @@ button.addEventListener('click', function () {
     }
 
     function openModal(data) {
-      const variants =
-JSON.parse(data.productVariants || "[]");
-selectedVariantId = '';
-selectedColor = '';
-selectedSize = '';
+
+    variants = JSON.parse(data.productVariants || "[]");
+
+    selectedVariantId = '';
+    selectedColor = '';
+    selectedSize = '';
       modalImage.src = data.productImage || '';
       modalImage.alt = data.productTitle || '';
       modalTitle.textContent = data.productTitle || '';
