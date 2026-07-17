@@ -112,14 +112,27 @@ let variants = [];
     function updateAddToCartState() {
       addToCartButton.disabled = !(selectedColor && selectedSize && selectedVariantId);
     }
-    function updateSelectedVariant() {
+ function updateSelectedVariant() {
 
   const variant = variants.find(function (item) {
-
-    return item.options.includes(selectedColor)
-      && item.options.includes(selectedSize);
-
+    return item.options.includes(selectedColor) &&
+           item.options.includes(selectedSize);
   });
+
+  console.log('Selected Color:', selectedColor);
+  console.log('Selected Size:', selectedSize);
+  console.log('Matched Variant:', variant);
+
+  if (variant) {
+    selectedVariantId = variant.id;
+  } else {
+    selectedVariantId = '';
+  }
+
+  console.log('Variant ID:', selectedVariantId);
+
+  updateAddToCartState();
+}
 
   if (variant) {
 
