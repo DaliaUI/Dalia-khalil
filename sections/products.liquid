@@ -54,6 +54,35 @@
   transition: transform .2s ease, background-color .2s ease;
   transform: translate(50%, -50%);
 }
+.products__button--1{
+  top:55%;
+  right:35%;
+}
+
+.products__button--2{
+  top:50%;
+  right:13%;
+}
+
+.products__button--3{
+  top:16%;
+  right:36%;
+}
+
+.products__button--4{
+  top:16%;
+  right:26%;
+}
+
+.products__button--5{
+  top:24%;
+  right:46%;
+}
+
+.products__button--6{
+  top:35%;
+  right:19%;
+}
 
   .products__button:hover {
     transform: translateY(-1px);
@@ -308,7 +337,7 @@
             />
             <button
               type="button"
-              class="products__button"
+              class="products__button products__button--{{ forloop.index }}"
               data-product-title="{{ block.settings.title | escape }}"
               data-product-price="{{ block.settings.price | escape }}"
               data-product-description="{{ block.settings.description | escape }}"
@@ -316,6 +345,7 @@
               data-product-sizes="{{ block.settings.sizes | escape }}"
               data-product-variant-id="{{ block.settings.variant_id | escape }}"
               data-product-image="{{ image_src }}"
+               
               style="
     top: {{ block.settings.plus_top }}%;
     right: {{ block.settings.plus_right }}%;
