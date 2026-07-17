@@ -143,6 +143,14 @@
             "plus_top": 50,
             "plus_right": 20
           }
+        },
+        "product_bt77xQ": {
+          "type": "product",
+          "settings": {
+            "product": "dark-denim-top",
+            "plus_top": 50,
+            "plus_right": 20
+          }
         }
       },
       "block_order": [
@@ -150,7 +158,8 @@
         "product_RRF6yG",
         "product_GkAmfh",
         "product_tBQxhp",
-        "product_8gg6xG"
+        "product_8gg6xG",
+        "product_bt77xQ"
       ],
       "name": "Products",
       "settings": {
