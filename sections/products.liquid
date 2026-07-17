@@ -231,6 +231,58 @@
       gap: 1.25rem;
     }
   }
+  .products__modal-color-buttons{
+  display:flex;
+  gap:0;
+  margin-top:8px;
+}
+
+.products__modal-color-button{
+  position:relative;
+  flex:1;
+  height:56px;
+  border:1px solid #000;
+  background:#fff;
+  padding-left:20px;
+  text-align:left;
+  font-size:20px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.products__modal-color-button.active{
+  background:#000;
+  color:#fff;
+}
+
+.products__modal-color-indicator{
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:4px;
+}
+
+.products__modal-color-indicator--blue{
+  background:#2563eb;
+}
+
+.products__modal-color-indicator--red{
+  background:#dc2626;
+}
+
+.products__modal-color-indicator--grey{
+  background:#6b7280;
+}
+
+.products__modal-color-indicator--black{
+  background:#000;
+}
+
+.products__modal-color-indicator--white{
+  background:#f3f4f6;
+  border-right:1px solid #d1d5db;
+}
 {% endstyle %}
 
 <section id="products-{{ section.id }}" class="products">
