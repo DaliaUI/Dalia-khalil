@@ -104,6 +104,17 @@
     "products_I1Kj2L": {
       "type": "products",
       "blocks": {
+        "product_GkAmfh": {
+          "type": "product",
+          "settings": {
+            "title": "Accordion Pleated Dress",
+            "price": "980,00€",
+            "description": "This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.",
+            "variant_id": "0",
+            "colors": "Blue, Red, Grey",
+            "sizes": "XS, S, M"
+          }
+        },
         "product_JmXCDd": {
           "type": "product",
           "settings": {
@@ -130,6 +141,7 @@
         }
       },
       "block_order": [
+        "product_GkAmfh",
         "product_JmXCDd",
         "product_RRF6yG"
       ],
