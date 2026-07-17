@@ -1,4 +1,5 @@
 function initProductModals() {
+  console.debug('[products-modal] initialize sections', document.querySelectorAll('.products').length);
   document.querySelectorAll('.products').forEach(function (section) {
     const modal = section.querySelector('.products__modal');
     const modalImage = section.querySelector('.products__modal-image');
@@ -146,3 +147,5 @@ if (document.readyState === 'loading') {
 } else {
   initProductModals();
 }
+
+window.initProductModals = initProductModals;
