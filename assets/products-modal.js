@@ -11,8 +11,14 @@ function initProductModals() {
     const closeButton = section.querySelector('.products__modal-close');
     const addToCartButton = section.querySelector('.products__add-to-cart');
 
-    if (!modal || !modalImage || !modalTitle || !modalPrice || !modalDescription || !colorButtonsContainer || !sizeSelect || !addToCartButton) {
+    const buttons = section.querySelectorAll('.products__button');
+
+    if (!modal || !modalImage || !modalTitle || !modalPrice || !modalDescription || !colorButtonsContainer || !sizeSelect || !closeButton || !addToCartButton) {
       return;
+    }
+
+    if (!buttons.length) {
+      console.warn('[products-modal] no product buttons found in section', section);
     }
 
     let selectedColor = '';
@@ -78,9 +84,10 @@ function initProductModals() {
       modal.setAttribute('aria-hidden', 'false');
     }
 
-    section.querySelectorAll('.products__button').forEach(function (button) {
+    buttons.forEach(function (button) {
       button.addEventListener('click', function () {
         selectedVariantId = button.dataset.productVariantId || '';
+        console.debug('[products-modal] open modal for', button.dataset.productTitle, 'variant', selectedVariantId);
         openModal(button.dataset);
       });
     });
