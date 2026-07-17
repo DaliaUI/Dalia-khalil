@@ -134,19 +134,7 @@ let variants = [];
   updateAddToCartState();
 }
 
-  if (variant) {
-
-    selectedVariantId = variant.id;
-
-  } else {
-
-    selectedVariantId = '';
-
-  }
-
-  updateAddToCartState();
-
-}
+ 
 
 function createColorButton(value) {
 
