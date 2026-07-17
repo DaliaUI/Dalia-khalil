@@ -5,22 +5,68 @@ function initProductModals() {
     console.warn('[products-modal] no .products sections found on the page');
   }
 
+  function createFallbackModal(section) {
+    const modal = section.querySelector('.products__modal') || document.createElement('div');
+    modal.className = 'products__modal';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.innerHTML = `
+      <div class="products__modal-dialog">
+        <button type="button" class="products__modal-close" aria-label="Close product details">×</button>
+        <div class="products__modal-header">
+          <img src="" alt="Product preview" class="products__modal-image" />
+          <div class="products__modal-info">
+            <h3 class="products__modal-title"></h3>
+            <p class="products__modal-price"></p>
+            <p class="products__modal-description"></p>
+          </div>
+        </div>
+
+        <p class="products__modal-label">Color</p>
+        <div class="products__modal-color-buttons"></div>
+
+        <div class="mt-5">
+          <label class="products__modal-label" for="products-size-select">Size</label>
+          <div class="products__modal-select-wrapper">
+            <select id="products-size-select" class="products__modal-select" aria-label="Size">
+              <option value="">Choose your size</option>
+            </select>
+            <span class="products__modal-select-icon">
+              ▼
+            </span>
+          </div>
+        </div>
+
+        <button type="button" class="products__add-to-cart" disabled>
+          ADD TO CART
+        </button>
+      </div>
+    `;
+    if (!section.contains(modal)) {
+      section.appendChild(modal);
+    }
+    return modal;
+  }
+
   sections.forEach(function (section) {
-    const modal = section.querySelector('.products__modal');
-    const modalImage = section.querySelector('.products__modal-image');
-    const modalTitle = section.querySelector('.products__modal-title');
-    const modalPrice = section.querySelector('.products__modal-price');
-    const modalDescription = section.querySelector('.products__modal-description');
-    const colorButtonsContainer = section.querySelector('.products__modal-color-buttons');
-    const sizeSelect = section.querySelector('.products__modal-select');
-    const closeButton = section.querySelector('.products__modal-close');
-    const addToCartButton = section.querySelector('.products__add-to-cart');
+    let modal = section.querySelector('.products__modal');
+    if (!modal) {
+      console.warn('[products-modal] no modal wrapper found, creating fallback for', section.id || 'unknown');
+      modal = createFallbackModal(section);
+    }
+
+    let modalImage = section.querySelector('.products__modal-image');
+    let modalTitle = section.querySelector('.products__modal-title');
+    let modalPrice = section.querySelector('.products__modal-price');
+    let modalDescription = section.querySelector('.products__modal-description');
+    let colorButtonsContainer = section.querySelector('.products__modal-color-buttons');
+    let sizeSelect = section.querySelector('.products__modal-select');
+    let closeButton = section.querySelector('.products__modal-close');
+    let addToCartButton = section.querySelector('.products__add-to-cart');
 
     const buttons = section.querySelectorAll('.products__button');
 
     const sectionId = section.id || 'unknown';
     const missingElements = [];
-    if (!modal) missingElements.push('products__modal');
     if (!modalImage) missingElements.push('products__modal-image');
     if (!modalTitle) missingElements.push('products__modal-title');
     if (!modalPrice) missingElements.push('products__modal-price');
@@ -30,12 +76,20 @@ function initProductModals() {
     if (!closeButton) missingElements.push('products__modal-close');
     if (!addToCartButton) missingElements.push('products__add-to-cart');
 
-    console.debug('[products-modal] section init', sectionId, 'buttons?', buttons.length, 'missing?', missingElements.join(', ') || 'none');
-
     if (missingElements.length) {
-      console.warn('[products-modal] skipping section because required modal elements are missing:', sectionId, missingElements.join(', '));
-      return;
+      console.warn('[products-modal] patching missing modal elements:', sectionId, missingElements.join(', '));
+      modal = createFallbackModal(section);
+      modalImage = section.querySelector('.products__modal-image');
+      modalTitle = section.querySelector('.products__modal-title');
+      modalPrice = section.querySelector('.products__modal-price');
+      modalDescription = section.querySelector('.products__modal-description');
+      colorButtonsContainer = section.querySelector('.products__modal-color-buttons');
+      sizeSelect = section.querySelector('.products__modal-select');
+      closeButton = section.querySelector('.products__modal-close');
+      addToCartButton = section.querySelector('.products__add-to-cart');
     }
+
+    console.debug('[products-modal] section init', sectionId, 'buttons?', buttons.length, 'missing?', missingElements.join(', ') || 'none');
 
     if (!buttons.length) {
       console.warn('[products-modal] no product buttons found in section', sectionId);
