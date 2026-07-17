@@ -1,6 +1,11 @@
 function initProductModals() {
-  console.debug('[products-modal] initialize sections', document.querySelectorAll('.products').length);
-  document.querySelectorAll('.products').forEach(function (section) {
+  const sections = document.querySelectorAll('.products');
+  console.debug('[products-modal] initialize sections', sections.length);
+  if (!sections.length) {
+    console.warn('[products-modal] no .products sections found on the page');
+  }
+
+  sections.forEach(function (section) {
     const modal = section.querySelector('.products__modal');
     const modalImage = section.querySelector('.products__modal-image');
     const modalTitle = section.querySelector('.products__modal-title');
@@ -13,12 +18,15 @@ function initProductModals() {
 
     const buttons = section.querySelectorAll('.products__button');
 
+    console.debug('[products-modal] section init', section.id || 'unknown', 'modal?', !!modal, 'buttons?', buttons.length, 'close?', !!closeButton, 'addToCart?', !!addToCartButton);
+
     if (!modal || !modalImage || !modalTitle || !modalPrice || !modalDescription || !colorButtonsContainer || !sizeSelect || !closeButton || !addToCartButton) {
+      console.error('[products-modal] section missing required modal elements', section.id || 'unknown');
       return;
     }
 
     if (!buttons.length) {
-      console.warn('[products-modal] no product buttons found in section', section);
+      console.warn('[products-modal] no product buttons found in section', section.id || 'unknown');
     }
 
     let selectedColor = '';
