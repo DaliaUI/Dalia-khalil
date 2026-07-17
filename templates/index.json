@@ -106,9 +106,7 @@
       "name": "Products",
       "settings": {
         "heading": "Tisso vison in the wild"
-      },
-      "blocks": {},
-      "block_order": []
+      }
     },
     "product_list_fa6P9H": {
       "type": "product-list",
@@ -288,6 +286,7 @@
           ]
         }
       },
+      "disabled": true,
       "name": "Featured collection",
       "settings": {
         "collection": "all",
