@@ -199,10 +199,30 @@ function initProductModals() {
       const colors = data.productColors ? data.productColors.split(',').map(function (item) { return item.trim(); }).filter(Boolean) : [];
       const sizes = data.productSizes ? data.productSizes.split(',').map(function (item) { return item.trim(); }).filter(Boolean) : [];
 
-      colorButtonsContainer.innerHTML = '';
-      colors.forEach(function (color) {
-        colorButtonsContainer.appendChild(createColorButton(color));
-      });
+     colorButtonsContainer.innerHTML = '';
+
+colors.forEach(function (color) {
+  colorButtonsContainer.appendChild(
+    createColorButton(color)
+  );
+});
+
+/* أول لون يبقى Selected تلقائي */
+const firstColorButton =
+  colorButtonsContainer.querySelector(
+    '.products__modal-color-button'
+  );
+
+if (firstColorButton) {
+
+  firstColorButton.classList.add(
+    'products__modal-color-button--selected'
+  );
+
+  selectedColor =
+    firstColorButton.dataset.value;
+
+}
 
       fillSizeOptions(sizes);
       resetSelections();
