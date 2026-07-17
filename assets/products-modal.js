@@ -148,7 +148,7 @@ function createColorButton(value) {
   } else if (color === 'grey' || color === 'gray') {
     colorCode = '#6B7280';
   } else if (color === 'white') {
-    colorCode = '#E5E7EB';
+    colorCode = '#fff';
   } else if (color === 'black') {
     colorCode = '#000000';
   }
