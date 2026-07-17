@@ -272,7 +272,7 @@ updateSelectedVariant();
     alert('Please select color and size.');
     return;
   }
-
+console.log('Selected Variant:', selectedVariantId);
 fetch('/cart/add.js', {
   method: 'POST',
   headers: {
