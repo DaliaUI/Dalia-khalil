@@ -112,6 +112,28 @@ let variants = [];
     function updateAddToCartState() {
       addToCartButton.disabled = !(selectedColor && selectedSize && selectedVariantId);
     }
+    function updateSelectedVariant() {
+
+  const variant = variants.find(function (item) {
+
+    return item.options.includes(selectedColor)
+      && item.options.includes(selectedSize);
+
+  });
+
+  if (variant) {
+
+    selectedVariantId = variant.id;
+
+  } else {
+
+    selectedVariantId = '';
+
+  }
+
+  updateAddToCartState();
+
+}
 
 function createColorButton(value) {
 
@@ -146,10 +168,21 @@ function createColorButton(value) {
     ${value}
   `;
 
-  button.addEventListener('click', function () {
-    selectedColor = value;
-    updateAddToCartState();
-  });
+button.addEventListener('click', function () {
+
+  colorButtonsContainer
+    .querySelectorAll('.products__modal-color-button')
+    .forEach(function(btn){
+      btn.classList.remove('active');
+    });
+
+  button.classList.add('active');
+
+  selectedColor = value;
+
+  updateSelectedVariant();
+
+});
 
   return button;
 }
@@ -226,8 +259,9 @@ if (firstColorButton) {
     });
 
     sizeSelect.addEventListener('change', function () {
-      selectedSize = this.value;
-      updateAddToCartState();
+     selectedSize = this.value;
+
+updateSelectedVariant();
     });
 
     closeButton.addEventListener('click', function () {
