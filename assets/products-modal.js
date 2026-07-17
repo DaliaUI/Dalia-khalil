@@ -114,20 +114,73 @@ function initProductModals() {
     }
 
     function createColorButton(value) {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'products__modal-color-button';
-      button.textContent = value;
-      button.dataset.value = value;
-      button.addEventListener('click', function () {
-        selectedColor = this.dataset.value;
-        colorButtonsContainer.querySelectorAll('.products__modal-color-button').forEach(function (btn) {
-          btn.classList.toggle('products__modal-color-button--selected', btn === button);
-        });
-        updateAddToCartState();
+
+  const color = value.trim().toLowerCase();
+
+  let indicatorClass =
+    'products__modal-color-indicator--black';
+
+  if (color === 'blue') {
+    indicatorClass =
+      'products__modal-color-indicator--blue';
+  }
+
+  if (color === 'red') {
+    indicatorClass =
+      'products__modal-color-indicator--red';
+  }
+
+  if (color === 'grey' || color === 'gray') {
+    indicatorClass =
+      'products__modal-color-indicator--grey';
+  }
+
+  if (color === 'white') {
+    indicatorClass =
+      'products__modal-color-indicator--white';
+  }
+
+  const button = document.createElement('button');
+
+  button.type = 'button';
+
+  button.className =
+    'products__modal-color-button';
+
+  button.dataset.value = value;
+
+  button.innerHTML = `
+    <span
+      class="products__modal-color-indicator ${indicatorClass}">
+    </span>
+
+    ${value}
+  `;
+
+  button.addEventListener('click', function () {
+
+    selectedColor = this.dataset.value;
+
+    colorButtonsContainer
+      .querySelectorAll('.products__modal-color-button')
+      .forEach(function (btn) {
+
+        btn.classList.remove(
+          'products__modal-color-button--selected'
+        );
+
       });
-      return button;
-    }
+
+    button.classList.add(
+      'products__modal-color-button--selected'
+    );
+
+    updateAddToCartState();
+
+  });
+
+  return button;
+}
 
     function fillSizeOptions(sizes) {
       sizeSelect.innerHTML = '<option value="">Choose your size</option>' + sizes.map(function (size) {
