@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+function initProductModals() {
   document.querySelectorAll('.products').forEach(function (section) {
     const modal = section.querySelector('.products__modal');
     const modalImage = section.querySelector('.products__modal-image');
@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function resetSelections() {
       selectedColor = '';
       selectedSize = '';
-      selectedVariantId = '';
       colorButtonsContainer.querySelectorAll('.products__modal-color-button').forEach(function (button) {
         button.classList.remove('products__modal-color-button--selected');
       });
@@ -140,4 +139,10 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initProductModals);
+} else {
+  initProductModals();
+}
