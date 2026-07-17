@@ -104,18 +104,6 @@
     "products_I1Kj2L": {
       "type": "products",
       "blocks": {
-        "product_8gg6xG": {
-          "type": "product",
-          "settings": {
-            "image": "shopify://shop_images/casual-fashion-woman_925x_56b56608-f207-45c1-b677-bb5aa26c1c7a.jpg",
-            "title": "Tisso Vison Product",
-            "price": "$120",
-            "description": "A premium product with a refined finish.",
-            "variant_id": "0",
-            "colors": "Grey, Black",
-            "sizes": "XS, S, M"
-          }
-        },
         "product_JmXCDd": {
           "type": "product",
           "settings": {
@@ -163,14 +151,26 @@
             "colors": "White, Black",
             "sizes": "XS, S, M"
           }
+        },
+        "product_8gg6xG": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/casual-fashion-woman_925x_56b56608-f207-45c1-b677-bb5aa26c1c7a.jpg",
+            "title": "Tisso Vison Product",
+            "price": "$120",
+            "description": "A premium product with a refined finish.",
+            "variant_id": "0",
+            "colors": "Grey, Black",
+            "sizes": "XS, S, M"
+          }
         }
       },
       "block_order": [
-        "product_8gg6xG",
         "product_JmXCDd",
         "product_RRF6yG",
         "product_GkAmfh",
-        "product_tBQxhp"
+        "product_tBQxhp",
+        "product_8gg6xG"
       ],
       "name": "Products",
       "settings": {
