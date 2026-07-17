@@ -95,10 +95,10 @@ function initProductModals() {
       console.warn('[products-modal] no product buttons found in section', sectionId);
     }
 
-    let selectedColor = '';
-    let selectedSize = '';
-    let selectedVariantId = '';
-
+let selectedColor = '';
+let selectedSize = '';
+let selectedVariantId = '';
+let variants = [];
     function resetSelections() {
       selectedColor = '';
       selectedSize = '';
@@ -163,6 +163,9 @@ function createColorButton(value) {
     function openModal(data) {
       const variants =
 JSON.parse(data.productVariants || "[]");
+selectedVariantId = '';
+selectedColor = '';
+selectedSize = '';
       modalImage.src = data.productImage || '';
       modalImage.alt = data.productTitle || '';
       modalTitle.textContent = data.productTitle || '';
