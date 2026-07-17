@@ -323,29 +323,34 @@
     <div class="products__grid">
       {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
-          {% assign image_src = block.settings.image | img_url: '720x' %}
-          {% if image_src == blank %}
-            {% assign fallback_images = 'image 822.jpg,image 823.jpg,image 824.jpg,image 825.jpg,image 826.jpg,image 827.jpg' | split: ',' %}
-            {% assign image_src = fallback_images[forloop.index0] | strip | asset_url %}
-          {% endif %}
+          {% assign product = block.settings.product %}
 
+{% if product == blank %}
+  {% continue %}
+{% endif %}
+
+{% assign featured_image = product.featured_image %}
+
+{% if featured_image %}
+  {% assign image_src = featured_image | image_url: width: 720 %}
+{% else %}
+  {% assign image_src = 'image 822.jpg' | asset_url %}
+{% endif %}
           <div class="products__card">
             <img
               src="{{ image_src }}"
-              alt="{{ block.settings.title | escape }}"
+              alt="{{ product.title | escape }}"
               class="products__image"
             />
             <button
               type="button"
               class="products__button products__button--{{ forloop.index }}"
-              data-product-title="{{ block.settings.title | escape }}"
-              data-product-price="{{ block.settings.price | escape }}"
-              data-product-description="{{ block.settings.description | escape }}"
-              data-product-colors="{{ block.settings.colors | escape }}"
-              data-product-sizes="{{ block.settings.sizes | escape }}"
-              data-product-variant-id="{{ block.settings.variant_id | escape }}"
-              data-product-image="{{ image_src }}"
-               
+             data-product-title="{{ product.title | escape }}"
+data-product-price="{{ product.price | money }}"
+data-product-description="{{ product.description | strip_html | escape }}"
+data-product-image="{{ image_src }}"
+data-product-variants='{{ product.variants | json | escape }}'
+data-product-options='{{ product.options_with_values | json | escape }}'
            
             >
               <img src="{{ 'icon-plus.svg' | asset_url }}" alt="Open product details" />
@@ -565,47 +570,11 @@
       "type": "product",
       "name": "Product",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Product image"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Product title",
-          "default": "Tisso Vison Product"
-        },
-        {
-          "type": "text",
-          "id": "price",
-          "label": "Price",
-          "default": "$120"
-        },
-        {
-          "type": "textarea",
-          "id": "description",
-          "label": "Description",
-          "default": "A premium product with a refined finish."
-        },
-        {
-          "type": "text",
-          "id": "variant_id",
-          "label": "Variant ID",
-          "default": "0"
-        },
-        {
-          "type": "text",
-          "id": "colors",
-          "label": "Colors (comma separated)",
-          "default": "Blue, Red, Grey"
-        },
-        {
-          "type": "text",
-          "id": "sizes",
-          "label": "Sizes (comma separated)",
-          "default": "XS, S, M"
-        },
+      {
+  "type": "product",
+  "id": "product",
+  "label": "Select Product"
+},
 {
   "type": "range",
   "id": "plus_top",
@@ -624,6 +593,7 @@
   "step": 1,
   "default": 20
 }
+
       ]
     }
   ],
