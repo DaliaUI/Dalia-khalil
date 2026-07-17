@@ -113,70 +113,42 @@ function initProductModals() {
       addToCartButton.disabled = !(selectedColor && selectedSize && selectedVariantId);
     }
 
-    function createColorButton(value) {
+function createColorButton(value) {
 
   const color = value.trim().toLowerCase();
 
-  let indicatorClass =
-    'products__modal-color-indicator--black';
+  let colorCode = '#000000';
 
   if (color === 'blue') {
-    indicatorClass =
-      'products__modal-color-indicator--blue';
-  }
-
-  if (color === 'red') {
-    indicatorClass =
-      'products__modal-color-indicator--red';
-  }
-
-  if (color === 'grey' || color === 'gray') {
-    indicatorClass =
-      'products__modal-color-indicator--grey';
-  }
-
-  if (color === 'white') {
-    indicatorClass =
-      'products__modal-color-indicator--white';
+    colorCode = '#1D4ED8';
+  } else if (color === 'red') {
+    colorCode = '#BE123C';
+  } else if (color === 'grey' || color === 'gray') {
+    colorCode = '#6B7280';
+  } else if (color === 'white') {
+    colorCode = '#E5E7EB';
+  } else if (color === 'black') {
+    colorCode = '#000000';
   }
 
   const button = document.createElement('button');
 
   button.type = 'button';
-
-  button.className =
-    'products__modal-color-button';
-
+  button.className = 'products__modal-color-button';
   button.dataset.value = value;
 
   button.innerHTML = `
     <span
-      class="products__modal-color-indicator ${indicatorClass}">
+      class="products__modal-color-indicator"
+      style="background:${colorCode}">
     </span>
 
     ${value}
   `;
 
   button.addEventListener('click', function () {
-
-    selectedColor = this.dataset.value;
-
-    colorButtonsContainer
-      .querySelectorAll('.products__modal-color-button')
-      .forEach(function (btn) {
-
-        btn.classList.remove(
-          'products__modal-color-button--selected'
-        );
-
-      });
-
-    button.classList.add(
-      'products__modal-color-button--selected'
-    );
-
+    selectedColor = value;
     updateAddToCartState();
-
   });
 
   return button;
