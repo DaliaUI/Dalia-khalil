@@ -104,15 +104,15 @@
     "products_I1Kj2L": {
       "type": "products",
       "blocks": {
-        "product_tBQxhp": {
+        "product_8gg6xG": {
           "type": "product",
           "settings": {
-            "image": "shopify://shop_images/leather-jacket-and-tea_925x_2490cde1-7e61-4151-9a65-de8a763bc701.jpg",
-            "title": "Green Trench Coat",
-            "price": "Green Trench Coat",
+            "image": "shopify://shop_images/casual-fashion-woman_925x_56b56608-f207-45c1-b677-bb5aa26c1c7a.jpg",
+            "title": "Tisso Vison Product",
+            "price": "$120",
             "description": "A premium product with a refined finish.",
             "variant_id": "0",
-            "colors": "White, Black",
+            "colors": "Grey, Black",
             "sizes": "XS, S, M"
           }
         },
@@ -151,13 +151,26 @@
             "colors": "Red, Grey",
             "sizes": "XS, S, M"
           }
+        },
+        "product_tBQxhp": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/leather-jacket-and-tea_925x_2490cde1-7e61-4151-9a65-de8a763bc701.jpg",
+            "title": "Green Trench Coat",
+            "price": "Green Trench Coat",
+            "description": "A premium product with a refined finish.",
+            "variant_id": "0",
+            "colors": "White, Black",
+            "sizes": "XS, S, M"
+          }
         }
       },
       "block_order": [
-        "product_tBQxhp",
+        "product_8gg6xG",
         "product_JmXCDd",
         "product_RRF6yG",
-        "product_GkAmfh"
+        "product_GkAmfh",
+        "product_tBQxhp"
       ],
       "name": "Products",
       "settings": {
