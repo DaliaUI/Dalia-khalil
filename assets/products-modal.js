@@ -273,17 +273,37 @@ updateSelectedVariant();
     return;
   }
 
-  fetch('/cart/add.js', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify({
-      id: Number(selectedVariantId),
-      quantity: 1
-    })
+fetch('/cart/add.js', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  },
+  body: JSON.stringify({
+    id: Number(selectedVariantId),
+    quantity: 1
   })
+})
+.then(async (response) => {
+
+  console.log('Status:', response.status);
+
+  const data = await response.json();
+
+  console.log('Response:', data);
+
+  if (!response.ok) {
+    alert(data.description || 'Failed');
+    return;
+  }
+
+  alert('✅ Product added successfully');
+
+})
+.catch((err) => {
+  console.error(err);
+  alert(err.message);
+});
   .then(response => response.json())
   .then(() => {
 
