@@ -103,6 +103,22 @@
     },
     "products_I1Kj2L": {
       "type": "products",
+      "blocks": {
+        "product_RRF6yG": {
+          "type": "product",
+          "settings": {
+            "title": "Tailored Jacket",
+            "price": "$120",
+            "description": "This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.",
+            "variant_id": "0",
+            "colors": "Blue, Black",
+            "sizes": "XS, S, M"
+          }
+        }
+      },
+      "block_order": [
+        "product_RRF6yG"
+      ],
       "name": "Products",
       "settings": {
         "heading": "Tisso vison in the wild"
