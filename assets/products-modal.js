@@ -161,15 +161,26 @@ function createColorButton(value) {
     }
 
     function openModal(data) {
-      selectedVariantId = data.productVariantId || '';
+      const variants =
+JSON.parse(data.productVariants || "[]");
       modalImage.src = data.productImage || '';
       modalImage.alt = data.productTitle || '';
       modalTitle.textContent = data.productTitle || '';
       modalPrice.textContent = data.productPrice || '';
       modalDescription.textContent = data.productDescription || '';
 
-      const colors = data.productColors ? data.productColors.split(',').map(function (item) { return item.trim(); }).filter(Boolean) : [];
-      const sizes = data.productSizes ? data.productSizes.split(',').map(function (item) { return item.trim(); }).filter(Boolean) : [];
+     const options = JSON.parse(data.productOptions || "[]");
+
+const colorOption = options.find(option =>
+    option.name.toLowerCase() === "color"
+);
+
+const sizeOption = options.find(option =>
+    option.name.toLowerCase() === "size"
+);
+
+const colors = colorOption ? colorOption.values : [];
+const sizes = sizeOption ? sizeOption.values : [];
 
      colorButtonsContainer.innerHTML = '';
 
