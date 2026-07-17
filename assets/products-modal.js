@@ -266,44 +266,48 @@ updateSelectedVariant();
         modal.setAttribute('aria-hidden', 'true');
       }
     });
-
 addToCartButton.addEventListener('click', function () {
 
   if (!selectedVariantId) {
     alert('Please select color and size.');
     return;
   }
-console.log('Selected Variant:', selectedVariantId);
-fetch('/cart/add.js', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-  },
-  body: JSON.stringify({
-    id: Number(selectedVariantId),
-    quantity: 1
+
+  console.log('Selected Variant:', selectedVariantId);
+
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify({
+      id: Number(selectedVariantId),
+      quantity: 1
+    })
   })
-})
-.then(async (response) => {
+  .then(async (response) => {
 
-  console.log('Status:', response.status);
+    const data = await response.json();
 
-  const data = await response.json();
+    console.log('Response:', data);
 
-  console.log('Response:', data);
+    if (!response.ok) {
+      alert(data.description || 'Failed');
+      return;
+    }
 
-  if (!response.ok) {
-    alert(data.description || 'Failed');
-    return;
-  }
+    alert('✅ Product added successfully');
 
-  alert('✅ Product added successfully');
+    modal.classList.remove('products__modal--open');
+    modal.setAttribute('aria-hidden', 'true');
 
-})
-.catch((err) => {
-  console.error(err);
-  alert(err.message);
+  })
+  .catch((err) => {
+    console.error(err);
+    alert(err.message);
+  });
+
 });
 
 
