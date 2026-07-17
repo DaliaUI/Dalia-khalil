@@ -107,61 +107,41 @@
         "product_JmXCDd": {
           "type": "product",
           "settings": {
-            "image": "shopify://shop_images/black-bag-over-the-shoulder_925x_4cae5708-5e9e-4e7e-96ec-9649f0c20cd8.jpg",
-            "title": "Orange Wide Leg",
-            "price": "980,00€",
-            "description": "This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.",
-            "variant_id": "0",
-            "colors": "White, Black",
-            "sizes": "XS, S, M"
+            "product": "black-leather-bag",
+            "plus_top": 59,
+            "plus_right": 27
           }
         },
         "product_RRF6yG": {
           "type": "product",
           "settings": {
-            "image": "shopify://shop_images/man-adjusts-blue-tuxedo-bowtie_925x_55a49e12-d54b-488e-b7a0-ea4c201eb01f.jpg",
-            "title": "Tailored Jacket",
-            "price": "980,00€",
-            "description": "This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.",
-            "variant_id": "0",
-            "colors": "Blue, Black",
-            "sizes": "XS, S, M"
+            "product": "",
+            "plus_top": 50,
+            "plus_right": 20
           }
         },
         "product_GkAmfh": {
           "type": "product",
           "settings": {
-            "image": "shopify://shop_images/red-plaid-shirt_925x_70e9e5a8-8fc5-4d60-9a9a-cc2e0dd57cc9.jpg",
-            "title": "Accordion Pleated Dress",
-            "price": "980,00€",
-            "description": "This one-piece swimsuit is crafted from jersey featuring an allover micro Monogram motif in relief.",
-            "variant_id": "0",
-            "colors": "Red, Grey",
-            "sizes": "XS, S, M"
+            "product": "",
+            "plus_top": 50,
+            "plus_right": 20
           }
         },
         "product_tBQxhp": {
           "type": "product",
           "settings": {
-            "image": "shopify://shop_images/leather-jacket-and-tea_925x_2490cde1-7e61-4151-9a65-de8a763bc701.jpg",
-            "title": "Green Trench Coat",
-            "price": "Green Trench Coat",
-            "description": "A premium product with a refined finish.",
-            "variant_id": "0",
-            "colors": "White, Black",
-            "sizes": "XS, S, M"
+            "product": "",
+            "plus_top": 50,
+            "plus_right": 20
           }
         },
         "product_8gg6xG": {
           "type": "product",
           "settings": {
-            "image": "shopify://shop_images/casual-fashion-woman_925x_56b56608-f207-45c1-b677-bb5aa26c1c7a.jpg",
-            "title": "Tisso Vison Product",
-            "price": "$120",
-            "description": "A premium product with a refined finish.",
-            "variant_id": "0",
-            "colors": "Grey, Black",
-            "sizes": "XS, S, M"
+            "product": "",
+            "plus_top": 50,
+            "plus_right": 20
           }
         }
       },
