@@ -245,6 +245,7 @@ if (firstColorButton) {
 
       fillSizeOptions(sizes);
       resetSelections();
+      variants = JSON.parse(data.productVariants || "[]");
       addToCartButton.disabled = true;
       modal.classList.add('products__modal--open');
       modal.setAttribute('aria-hidden', 'false');
