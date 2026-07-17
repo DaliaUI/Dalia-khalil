@@ -267,7 +267,7 @@ updateSelectedVariant();
       }
     });
 
-  addToCartButton.addEventListener('click', function () {
+addToCartButton.addEventListener('click', function () {
 
   if (!selectedVariantId) {
     alert('Please select color and size.');
@@ -305,18 +305,8 @@ fetch('/cart/add.js', {
   console.error(err);
   alert(err.message);
 });
-  .then(response => response.json())
-  .then(() => {
 
-    modal.classList.remove('products__modal--open');
-    modal.setAttribute('aria-hidden','true');
 
-    document.dispatchEvent(new CustomEvent('cart:refresh'));
-
-  })
-  .catch(console.error);
-
-});
 
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && modal.classList.contains('products__modal--open')) {
